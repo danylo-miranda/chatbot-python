@@ -44,7 +44,7 @@ def bot():
         field_text = driver.find_element(By.XPATH,'//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div[2]/div[1]/p')
         field_text.click()
         time.sleep(1)
-        return_msg = 'Bom dia !'
+        return_msg = 'Boa tarde !'
         field_text.send_keys(f'{return_msg}', Keys.ENTER)
         #FECHAR CONTATO
         webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
@@ -53,20 +53,11 @@ def bot():
 
 def waiting_new_msg():
     try:
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.CLASS_NAME, '_21Ahp'))
         )
     except:
-        sys.stdout.write('\rAguardando novas mensagens...')
-        sys.stdout.flush()
-        animate()
-
-def animate():
-    while True:
-        for char in "|/-\\":
-            sys.stdout.write('\rAguardando novas mensagens ' + char)
-            sys.stdout.flush()
-            time.sleep(0.1)
+        print('Aguardando novas mensagens...')
 
 while True:
     waiting_new_msg()
